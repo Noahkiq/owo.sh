@@ -139,7 +139,7 @@ function screenshot() {
 
 	# Open our new entry to use it!
 	entry=$path$filename
-	upload=$(curl -s -F "files[]=@"$entry";type=image/png" https://api.awau.moe/upload/pomf?key="$key")
+	upload=$(curl -s -F "files[]=@"$entry";type=image/png" https://noah.doesnt-have-a.life/upload.php?key="$key")
 
 	if [ "$print_debug" = true ] ; then
 		echo $upload
@@ -180,7 +180,7 @@ function upload() {
 
 		filesize=$(wc -c <"$entry")
 		if [[ $filesize -le 83886081 ]]; then
-			upload=$(curl -s -F "files[]=@"$entry";type=$mimetype" https://api.awau.moe/upload/pomf?key="$key")
+			upload=$(curl -s -F "files[]=@"$entry";type=$mimetype" https://noah.doesnt-have-a.life/upload.php?key="$key")
 			item="$(egrep -o '"url":\s*"[^"]+"' <<<"${upload}" | cut -d "\"" -f 4)"
 		else
 			echo "ERROR : File size too large or another error occured!"
@@ -211,7 +211,7 @@ function runupdate() {
 
 	if [ ! -d $owodir/.git ]; then
 		git -C $owodir init
-		git -C $owodir remote add origin https://github.com/whats-this/owo.sh.git
+		git -C $owodir remote add origin https://github.com/Noahkiq/owo.sh.git
 		git -C $owodir fetch --all
 		git -C $owodir checkout -t origin/stable
 		git -C $owodir reset --hard origin/stable
